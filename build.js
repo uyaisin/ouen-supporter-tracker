@@ -17,6 +17,28 @@ function loadData() {
   }
 }
 
+// history.json（スナップショット配列）→ 1日1点の推移データ [{date:"7/3", total}] に整形。
+function loadHistory() {
+  const p = path.join(ROOT, "history.json");
+  if (!fs.existsSync(p)) return [];
+  let snaps;
+  try { snaps = JSON.parse(fs.readFileSync(p, "utf8")); } catch { return []; }
+  if (!Array.isArray(snaps)) return [];
+  // 日付ごとに最後の値を採用
+  const byDay = new Map();
+  for (const s of snaps) {
+    if (!s || !s.t) continue;
+    const d = new Date(s.t);
+    if (isNaN(d)) continue;
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    const total = typeof s.total === "number"
+      ? s.total
+      : Object.values(s.prefs || {}).reduce((a, b) => a + (Number(b) || 0), 0);
+    byDay.set(key, { date: `${d.getMonth() + 1}/${d.getDate()}`, total });
+  }
+  return Array.from(byDay.values());
+}
+
 function todayISO() {
   const n = new Date();
   const z = (x) => String(x).padStart(2, "0");
@@ -30,11 +52,14 @@ function main() {
   const goal = data.goal || 1000;
   const updated = data.updated && data.updated !== "auto" ? data.updated : todayISO();
 
+  const history = loadHistory();
+
   const template = fs.readFileSync(path.join(ROOT, "template.html"), "utf8");
   const html = template
     .replace(/__DATA__/g, JSON.stringify(prefs))
     .replace(/__DELTA__/g, JSON.stringify(delta))
     .replace(/__GOAL__/g, String(goal))
+    .replace(/__HISTORY__/g, JSON.stringify(history))
     .replace(/__UPDATED__/g, updated);
 
   fs.writeFileSync(path.join(ROOT, "supporter-tracker.html"), html);

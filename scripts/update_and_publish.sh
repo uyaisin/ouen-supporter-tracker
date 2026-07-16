@@ -35,8 +35,8 @@ fi
 node build.js >>"$LOG" 2>&1
 node scripts/render_png.js >>"$LOG" 2>&1
 
-if ! git diff --quiet -- supporter-tracker.png supporter-tracker.html index.html data.json 2>/dev/null; then
-  git add supporter-tracker.png supporter-tracker.html index.html data.json
+if ! git diff --quiet -- supporter-tracker.png supporter-tracker.html index.html data.json history.json 2>/dev/null; then
+  git add supporter-tracker.png supporter-tracker.html index.html data.json history.json
   git commit -m "auto: サポータートラッカー更新 $(ts)" >>"$LOG" 2>&1
   if git push origin main >>"$LOG" 2>&1; then
     log "published"
