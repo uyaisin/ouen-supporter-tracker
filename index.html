@@ -99,10 +99,10 @@
 </div>
 <script>
 if (new URLSearchParams(location.search).get("embed") === "1") document.body.classList.add("embed");
-const DATA = {"東京都":1};          // { "東京":12, ... }（都道府県→サポーター数）
-const DELTA = {"東京都":1};         // { "福岡":3, ... }（24時間前からの増加分。増えた瞬間演出用）
+const DATA = {"東京都":2};          // { "東京":12, ... }（都道府県→サポーター数）
+const DELTA = {"東京都":2};         // { "福岡":3, ... }（24時間前からの増加分。増えた瞬間演出用）
 const GOAL = 1000;
-const HISTORY = [{"date":"7/17","total":1}];     // [ {date:"7/3", total:10}, ... ]（推移グラフ用・1日1点）
+const HISTORY = [{"date":"7/17","total":2}];     // [ {date:"7/3", total:10}, ... ]（推移グラフ用・1日1点）
 
 const REGIONS = {
   "北海道・東北": ["北海道","青森","岩手","宮城","秋田","山形","福島"],
