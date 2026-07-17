@@ -95,14 +95,14 @@
   <div class="secttl">📍 都道府県別サポーター数</div>
   <div id="regions"></div>
 
-  <div class="foot">応援共創プロジェクト｜更新 2026-07-17 ／ 一人ひとりの応援が、全国に広がっています</div>
+  <div class="foot">応援共創プロジェクト｜更新 2026-07-18 ／ 一人ひとりの応援が、全国に広がっています</div>
 </div>
 <script>
 if (new URLSearchParams(location.search).get("embed") === "1") document.body.classList.add("embed");
 const DATA = {"東京都":2,"千葉県":1};          // { "東京":12, ... }（都道府県→サポーター数）
 const DELTA = {"東京都":2,"千葉県":1};         // { "福岡":3, ... }（24時間前からの増加分。増えた瞬間演出用）
 const GOAL = 1000;
-const HISTORY = [{"date":"7/17","total":3}];     // [ {date:"7/3", total:10}, ... ]（推移グラフ用・1日1点）
+const HISTORY = [{"date":"7/17","total":3},{"date":"7/18","total":3}];     // [ {date:"7/3", total:10}, ... ]（推移グラフ用・1日1点）
 
 const REGIONS = {
   "北海道・東北": ["北海道","青森","岩手","宮城","秋田","山形","福島"],
