@@ -1,10 +1,6 @@
 {
   "goal": 1000,
   "updated": "auto",
-  "prefs": {
-    "東京都": 1
-  },
-  "delta": {
-    "東京都": 1
-  }
+  "prefs": {},
+  "delta": {}
 }
